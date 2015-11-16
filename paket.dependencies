@@ -1,4 +1,4 @@
 source "https://nuget.org/api/v2"
 source "https://www.myget.org/F/particular/"
 
-nuget NServiceBus = 6.0.0-unstable1076
+nuget NServiceBus  >= 6
