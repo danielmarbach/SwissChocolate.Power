@@ -30,12 +30,22 @@ namespace Facility
             stopWatch.Reset();
 
             var destination = "Chocolate.Facility.Producer";
-            var tasks = new List<Task>();
             stopWatch.Start();
-            for (int i = 0; i < Constants.NumberOfMessages; i++)
+
+            var tasks = new List<Task>();
+
+            for (int i = 0; i < 8; i++)
             {
-                tasks.Add(bus.SendAsync(destination, new ProduceChocolateBar { LotNumber = i, MaxLotNumber = Constants.NumberOfMessages }));
+                var task = Task.Run(async () =>
+                {
+                    for (int j = 0; j < Constants.NumberOfMessages / 8; j++)
+                    {
+                        await bus.SendAsync(destination, new ProduceChocolateBar { LotNumber = j, MaxLotNumber = Constants.NumberOfMessages }).ConfigureAwait(false);
+                    }
+                });
+                tasks.Add(task);
             }
+
             Task.WhenAll(tasks).GetAwaiter().GetResult();
             stopWatch.Stop();
             Console.WriteLine($"Sending #{ Constants.NumberOfMessages } of msgs over the bus took { stopWatch.Elapsed.ToString("G")}");
