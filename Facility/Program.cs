@@ -23,7 +23,7 @@ namespace Facility
             configuration.UseTransport<MsmqTransport>();
             configuration.UsePersistence<InMemoryPersistence>();
 
-            var bus = Endpoint.StartAsync(configuration).GetAwaiter().GetResult().CreateBusContext();
+            var bus = Endpoint.Start(configuration).GetAwaiter().GetResult().CreateBusSession();
             stopWatch.Stop();
 
             Console.WriteLine($"Initalizing the bus took { stopWatch.Elapsed.ToString("G")}");
@@ -40,7 +40,7 @@ namespace Facility
                 {
                     for (int j = 0; j < Constants.NumberOfMessages / 8; j++)
                     {
-                        await bus.SendAsync(destination, new ProduceChocolateBar { LotNumber = j, MaxLotNumber = Constants.NumberOfMessages }).ConfigureAwait(false);
+                        await bus.Send(destination, new ProduceChocolateBar { LotNumber = j, MaxLotNumber = Constants.NumberOfMessages }).ConfigureAwait(false);
                     }
                 });
                 tasks.Add(task);

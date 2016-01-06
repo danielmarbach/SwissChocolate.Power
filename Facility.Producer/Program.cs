@@ -25,7 +25,7 @@ namespace Facility.Producer
             configuration.UseTransport<MsmqTransport>();
             configuration.UsePersistence<InMemoryPersistence>();
 
-            var bus = Endpoint.StartAsync(configuration).GetAwaiter().GetResult();
+            var bus = Endpoint.Start(configuration).GetAwaiter().GetResult();
             stopWatch.Stop();
 
             Console.WriteLine($"Initalizing the bus took { stopWatch.Elapsed.ToString("G")}");

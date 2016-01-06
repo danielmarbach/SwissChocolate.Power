@@ -1,4 +1,4 @@
 NUGET
   remote: https://www.myget.org/F/particular
   specs:
-    NServiceBus (6.0.0-unstable1081)
+    NServiceBus (6.0.0-unstable1341)
