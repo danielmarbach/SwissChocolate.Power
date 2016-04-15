@@ -1,4 +1,4 @@
 NUGET
-  remote: https://www.myget.org/F/particular
+  remote: https://nuget.org/api/v2
   specs:
-    NServiceBus (6.0.0-unstable1341)
+    NServiceBus (6.0.0-beta0001)

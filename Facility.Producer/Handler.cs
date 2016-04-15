@@ -9,7 +9,6 @@ namespace Facility.Producer
     {
         public async Task Handle(ProduceChocolateBar message, IMessageHandlerContext context)
         {
-            await Task.Delay(100).ConfigureAwait(false);
             Syncher.SyncEvent.Signal();
         }
     }
