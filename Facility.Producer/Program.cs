@@ -24,6 +24,7 @@ namespace Facility.Producer
             configuration.UseTransport<MsmqTransport>();
             configuration.UsePersistence<InMemoryPersistence>();
             configuration.EnableInstallers();
+            configuration.LimitMessageProcessingConcurrencyTo(Constants.MaxConcurrency);
 
             var bus = Endpoint.Start(configuration).GetAwaiter().GetResult();
             stopWatch.Stop();
