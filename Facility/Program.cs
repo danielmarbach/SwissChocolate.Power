@@ -17,14 +17,13 @@ namespace Facility
             DefaultFactory defaultFactory = LogManager.Use<DefaultFactory>();
             defaultFactory.Level(LogLevel.Error);
 
-            var configuration = new BusConfiguration();
-            configuration.EndpointName("Chocolate.Facility");
+            var configuration = new EndpointConfiguration("Chocolate.Facility");
 
             configuration.UseTransport<MsmqTransport>();
             configuration.UsePersistence<InMemoryPersistence>();
             configuration.EnableInstallers();
 
-            var bus = Endpoint.Start(configuration).GetAwaiter().GetResult().CreateBusSession();
+            var bus = Endpoint.Start(configuration).GetAwaiter().GetResult();
             stopWatch.Stop();
 
             Console.WriteLine($"Initalizing the bus took { stopWatch.Elapsed.ToString("G")}");

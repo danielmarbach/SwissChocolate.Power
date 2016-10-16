@@ -19,8 +19,7 @@ namespace Facility.Producer
             DefaultFactory defaultFactory = LogManager.Use<DefaultFactory>();
             defaultFactory.Level(LogLevel.Fatal);
 
-            var configuration = new BusConfiguration();
-            configuration.EndpointName("Chocolate.Facility.Producer");
+            var configuration = new EndpointConfiguration("Chocolate.Facility.Producer");
 
             configuration.UseTransport<MsmqTransport>();
             configuration.UsePersistence<InMemoryPersistence>();
